@@ -1,91 +1,112 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Iberian Chronicles</title>
-    <meta name="description" content="Meet the team behind Iberian Chronicles. We share simple travel tips for your trip to Spain." />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – Iberian Chronicles</title>
+  <meta name="description"
+    content="Meet the team behind Iberian Chronicles. We share simple travel tips for your trip to Spain." />
+  <link rel="stylesheet" href="/Styles/main.css" />
+  <link rel="stylesheet" href="/Styles/about.css" />
+</head>
+
+<body>
+  <div class="site-header">
     <header>
       <h1>Iberian Chronicles</h1>
     </header>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/Articles/">Articles</a>
+    <a href="/About/">About us</a>
+    <a href="/Contact/">Contact</a>
+    <a href="/Map/">Map</a>
+    </nav>
+  </div>
 
-    <nav aria-label="Main Navigation">
-      <a href="../index.html">Home</a>
-      <a href="../Articles/index.html">Articles</a>
-      <a href="index.html">About us</a>
-      <a href="../Contact/index.html">Contact</a>
-      <a href="../Map/index.html">Map</a>
+  <main id="page-main">
+    <div class="page-container">
+      <section class="about-section">
+        <h2 class="page-title">About This Blog</h2>
+        <p class="body-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non turpis at odio volutpat rhoncus sed in
+          nunc. Cras vel dui vitae neque pretium bibendum quis sed nisi.
+        </p>
+        <p class="body-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia curae; Donec convallis dui vitae massa vulputate, sit amet
+          volutpat arcu tristique.
+        </p>
+        <img class="team-photo" src="/Images/iberian_peninsula.webp" alt="Team photo" />
+      </section>
+
+      <section class="about-section">
+        <h2 class="page-title">Quick Notes</h2>
+
+        <article class="faq-item">
+          <h3 class="section-heading">1) Lorem ipsum dolor sit amet?</h3>
+          <p class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut eros id libero tristique fermentum.</p>
+        </article>
+        <hr class="faq-divider">
+
+        <article class="faq-item">
+          <h3 class="section-heading">2) Consectetur adipiscing elit?</h3>
+          <p class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus feugiat, nibh eget sodales pretium,
+            sapien mauris pulvinar lacus, et sodales erat lacus quis nibh.</p>
+        </article>
+        <hr class="faq-divider">
+
+        <article class="faq-item">
+          <h3 class="section-heading">3) Sed do eiusmod tempor incididunt?</h3>
+          <p class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at dictum lectus, ac elementum
+            arcu.</p>
+        </article>
+        <hr class="faq-divider">
+
+        <article class="faq-item">
+          <h3 class="section-heading">4) Ut enim ad minim veniam?</h3>
+          <p class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in est at arcu iaculis hendrerit et et
+            justo.</p>
+        </article>
+        <hr class="faq-divider">
+
+        <article class="faq-item">
+          <h3 class="section-heading">5) Duis aute irure dolor in reprehenderit?</h3>
+          <p class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et lacinia enim, eget euismod
+            lectus.</p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <p><strong>Iberian Chronicles</strong></p>
+      <p>Exploring the soul of the Iberian Peninsula</p>
+    </div>
+
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="/">Home</a>
+      <a href="/Articles/">Articles</a>
+      <a href="/About/">About us</a>
+      <a href="/Contact/">Contact</a>
+      <a href="/Map/">Map</a>
     </nav>
 
-    <main>
-        <section>
-            <h2>Welcome to Our Spain Travel Blog</h2>
-            <p>
-                Hello! We are <strong>Dina, Darío, and Taha</strong>. We love Spain! We started this blog to share our favorite places with you.
-            </p>
-            <p>
-                Spain is a beautiful country with many things to see. We visit busy cities like <strong>Madrid</strong> and <strong>Barcelona</strong>. We also go to quiet villages and sunny beaches. We want to show you the best food and the most beautiful views. 
-            </p>
-            <img src="images/team.jpg" alt="Dina, Darío, and Taha standing in front of a colorful street in Spain" style="max-width:100%; height:auto;">
-        </section>
+    <div class="footer-legal">
+      <p>© Iberian Chronicles Team</p>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </footer>
+  <script src="/Scripts/main.js"></script>
+</body>
 
-        <section>
-            <h2>Questions and Answers</h2>
-            
-            <article>
-                <h3>1)Why did you start this blog?</h3>
-                <p>We want to help people plan easy and fun trips to Spain. We share what we learn from our own travels. [cite: 23]</p>
-            </article>
-            <hr>
-
-            <article>
-                <h3>2)Who are the team members?</h3>
-                <p><strong>Dina Bakhtiari</strong> loves history. <strong>Darío Vivancos Novak</strong> takes the photos. <strong>Taha Jahangiri</strong> makes the maps. </p>
-            </article>
-            <hr>
-
-            <article>
-                <h3>3)What can I find on this website?</h3>
-                <p>You can find stories about Spanish food, maps of hidden places, and photos of famous landmarks. </p>
-            </article>
-            <hr>
-
-            <article>
-                <h3>4)Is it hard to travel in Spain?</h3>
-                <p>No! Spain is very friendly. We give you simple tips on how to move around and what to eat. </p>
-            </article>
-            <hr>
-
-            <article>
-                <h3>5)How can I talk to you?</h3>
-                <p>You can go to our <strong>Contact</strong> page. We have a form there for your questions! </p>
-            </article>
-        </section>
-    </main>
-
-    <footer>
-      <div>
-        <p><strong>Iberian Chronicles</strong></p>
-        <p>Sharing the best of Spain since 2026.</p>
-      </div>
-
-      <nav aria-label="Footer Navigation">
-        <a href="../index.html">Home</a> |
-        <a href="../Articles/index.html">Articles</a> |
-        <a href="index.html">About us</a> |
-        <a href="../Contact/index.html">Contact</a> |
-        <a href="../Map/index.html">Map</a>
-      </nav>
-
-      <div>
-        <p>© 2026 Dina Bakhtiari, Darío Vivancos Novak, and Taha Jahangiri</p>
-        <p>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms and Conditions</a>
-        </p>
-      </div>
-    </footer>
-  </body>
 </html>
