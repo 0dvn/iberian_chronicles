@@ -72,7 +72,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/Images/iberian_peninsula.webp") 20% 50% / 9% no-repeat;
+  background: url("/images/iberian_peninsula.webp") 20% 50% / 9% no-repeat;
   filter: invert(1);
   opacity: 0.18;
   pointer-events: none;
