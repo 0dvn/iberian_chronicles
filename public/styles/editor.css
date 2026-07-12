@@ -1,0 +1,79 @@
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+#quill-editor {
+  min-height: 300px;
+  background: #fffdf8;
+  border: 1px solid #d7c7ae;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  font-size: 1rem;
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid #d7c7ae;
+  border-radius: 4px 4px 0 0;
+  background: #faf6f0;
+}
+
+.image-preview img,
+.gallery-thumb img {
+  max-height: 150px;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  border: 1px solid #e8dcc8;
+}
+
+.gallery-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.gallery-thumb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.gallery-thumb label {
+  font-size: 0.8rem;
+  color: #9f2f2f;
+  cursor: pointer;
+}
+
+.map-preview {
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e8dcc8;
+}
+
+.map-preview iframe {
+  display: block;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: 'New Article', extraCSS: ['/styles/editor.css', 'https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css'] }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <h2 class="page-title">New Article</h2>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/articles" method="post" enctype="multipart/form-data" class="editor-form">
+        <div class="form-group">
+          <label class="form-label" for="title">Title</label>
+          <input class="form-input" type="text" id="title" name="title" placeholder="Article title" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="description">Description</label>
+          <input class="form-input" type="text" id="description" name="description" placeholder="Short summary of your article">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="category">Category</label>
+            <select class="form-select" id="category" name="category">
+              <% Object.entries(CATEGORIES).forEach(([value, label]) => { %>
+              <option value="<%= value %>"><%= label %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tags">Tags</label>
+            <input class="form-input" type="text" id="tags" name="tags" placeholder="parks, museums, food (comma separated)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="city">City</label>
+          <input class="form-input" type="text" id="city" name="city" placeholder="Madrid, Barcelona, etc.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="featuredImage">Featured Image</label>
+          <input class="form-input" type="file" id="featuredImage" name="featuredImage" accept="image/jpeg,image/png,image/webp">
+          <div class="image-preview" id="featuredPreview"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Content</label>
+          <div id="quill-editor"></div>
+          <input type="hidden" name="content" id="content-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="gallery">Photo Gallery</label>
+          <input class="form-input" type="file" id="gallery" name="gallery" accept="image/jpeg,image/png,image/webp" multiple>
+          <div class="gallery-preview" id="galleryPreview"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mapQuery">Map Location</label>
+          <input class="form-input" type="text" id="mapQuery" name="mapQuery" placeholder="Madrid,Spain">
+          <div class="map-preview" id="mapPreview"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="status">Status</label>
+          <select class="form-select" id="status" name="status">
+            <option value="published">Publish now</option>
+            <option value="draft">Save as draft</option>
+          </select>
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn btn-primary" type="submit">Publish</button>
+          <a href="/articles" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <%- include('../partials/footer', { extraJS: ['https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js', '/scripts/article-editor.js'] }) %>
+</body>
+</html>

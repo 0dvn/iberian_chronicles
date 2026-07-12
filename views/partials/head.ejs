@@ -1,0 +1,13 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %> – Iberian Chronicles</title>
+<% if (typeof description !== 'undefined') { %>
+<meta name="description" content="<%= description %>">
+<% } %>
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+<% if (typeof extraCSS !== 'undefined') { %>
+<% extraCSS.forEach(css => { %>
+<link rel="stylesheet" href="<%= css %>">
+<% }) %>
+<% } %>

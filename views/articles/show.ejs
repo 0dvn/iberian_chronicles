@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: article.title, description: article.description, extraCSS: ['/styles/city-article.css', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css'] }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <section class="city-intro">
+        <h2 class="city-title"><%= article.title %></h2>
+        <div class="article-meta">
+          <% if (article.category) { %>
+          <span class="tag-badge"><%= CATEGORIES[article.category] || article.category %></span>
+          <% } %>
+          <% if (article.tags && article.tags.length > 0) { %>
+          <% article.tags.forEach(t => { %>
+          <a class="tag-badge" href="/articles?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+          <% }) %>
+          <% } %>
+        </div>
+        <p class="city-lead"><%= article.description %></p>
+
+        <% if (article.featuredImage) { %>
+        <img class="city-hero" src="<%= article.featuredImage %>" alt="<%= article.title %> photo" loading="eager" decoding="async">
+        <% } %>
+
+        <div class="city-content">
+          <%- article.content %>
+        </div>
+
+        <% if (article.gallery && article.gallery.length > 0) { %>
+        <ul class="city-topics">
+          <li>
+            <article class="city-topic">
+              <h3 class="topic-title">Photo Gallery</h3>
+              <div class="photo-gallery">
+                <% article.gallery.forEach(img => { %>
+                <a class="glightbox" href="<%= img.url %>" data-gallery="<%= article.slug %>-gallery">
+                  <img src="<%= img.url %>" alt="<%= img.alt %>">
+                </a>
+                <% }) %>
+              </div>
+            </article>
+            <hr>
+          </li>
+        </ul>
+        <% } %>
+
+        <% if (article.mapQuery) { %>
+        <ul class="city-topics">
+          <li>
+            <article class="city-topic">
+              <h3 class="topic-title">Find it on the Map</h3>
+              <iframe class="city-map" src="https://www.google.com/maps?q=<%= article.mapQuery %>&output=embed" width="100%" height="400" allowfullscreen="" loading="lazy" title="Map of <%= article.title %>"></iframe>
+            </article>
+            <hr>
+          </li>
+        </ul>
+        <% } %>
+
+        <div class="article-author">
+          <img src="<%= article.author.avatar %>" alt="<%= article.author.username %>">
+          <div>
+            <span>Written by</span>
+            <a href="/users/<%= article.author.username %>"><%= article.author.username %></a>
+          </div>
+        </div>
+
+        <div class="article-interactions">
+          <% if (currentUser) { %>
+          <button class="btn-like-article<%= userLikedArticle ? ' liked' : '' %>" type="button" aria-pressed="<%= userLikedArticle ? 'true' : 'false' %>" aria-label="<%= userLikedArticle ? 'Unlike article' : 'Like article' %>" data-article-id="<%= article._id %>">
+            <span class="like-icon"><i class="<%= userLikedArticle ? 'fa-solid' : 'fa-regular' %> fa-heart"></i></span>
+            <span class="like-count"><%= articleLikeCount %></span>
+          </button>
+          <button class="btn-bookmark<%= userBookmarked ? ' bookmarked' : '' %>" type="button" aria-pressed="<%= userBookmarked ? 'true' : 'false' %>" aria-label="<%= userBookmarked ? 'Remove bookmark' : 'Save article' %>" data-article-id="<%= article._id %>">
+            <span class="bookmark-icon"><i class="<%= userBookmarked ? 'fa-solid' : 'fa-regular' %> fa-bookmark"></i></span>
+            <span class="bookmark-label"><%= userBookmarked ? 'Saved' : 'Save' %></span>
+          </button>
+          <% } else { %>
+          <span class="like-count-static"><span class="like-icon"><i class="fa-regular fa-heart"></i></span> <%= articleLikeCount %></span>
+          <% } %>
+
+          <div class="share-buttons">
+            <a class="share-btn share-x" href="https://x.com/intent/tweet?url=<%= encodeURIComponent(baseUrl + '/articles/' + article.slug) %>&text=<%= encodeURIComponent(article.title + ' – Iberian Chronicles') %>" target="_blank" rel="noopener noreferrer" aria-label="Share this article on X"><i class="fa-brands fa-x-twitter"></i> X</a>
+            <a class="share-btn share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(baseUrl + '/articles/' + article.slug) %>" target="_blank" rel="noopener noreferrer" aria-label="Share this article on Facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+          </div>
+        </div>
+
+        <a class="back-link" href="/articles">Back to all articles</a>
+      </section>
+
+      <%- include('../partials/comments', { comments, commentLikes, userLikedComments, article }) %>
+    </div>
+  </main>
+
+  <%- include('../partials/footer', { extraJS: ['https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', '/scripts/likes.js'] }) %>
+  <script>GLightbox({ selector: '.glightbox' });</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.auth-card {
+  max-width: 440px;
+  margin: 0 auto;
+  background: #fffaf3;
+  border: 1px solid #e8dcc8;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 1.5rem;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #4f4335;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  color: #8a2f22;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,24 @@
+<footer class="site-footer">
+  <div class="footer-brand">
+    <p><strong>Iberian Chronicles</strong></p>
+    <p>Exploring the soul of the Iberian Peninsula</p>
+  </div>
+  <nav class="footer-links" aria-label="Footer Navigation">
+    <a href="/">Home</a>
+    <a href="/articles">Articles</a>
+    <a href="/about">About us</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <div class="footer-legal">
+    <p>&copy; Iberian Chronicles Team</p>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms and Conditions</a>
+    <a href="#">Sitemap</a>
+  </div>
+</footer>
+<script src="/scripts/main.js"></script>
+<% if (typeof extraJS !== 'undefined') { %>
+<% extraJS.forEach(js => { %>
+<script src="<%= js %>"></script>
+<% }) %>
+<% } %>

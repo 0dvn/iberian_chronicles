@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: 'Contact', description: 'Contact the team at Iberian Chronicles.', extraCSS: ['/styles/contact.css'] }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <section id="contact-form-section">
+        <h2 class="page-title">Contact Us</h2>
+        <p class="body-text">
+          Do you have a question about Spain or Portugal? Reach out to us using the form below or send us an
+          email &mdash; we love to help our readers!
+        </p>
+        <p class="body-text">
+          Curious about who's behind Iberian Chronicles? Learn more <a href="/about">About Us</a>.
+        </p>
+
+        <hr>
+
+        <form id="contact-form" action="" method="post" data-endpoint="https://formspree.io/f/mgonljnq" novalidate aria-describedby="contact-form-help">
+          <p id="contact-form-help" class="body-text">Fields marked as required must be completed before the message can be sent.</p>
+          <div class="form-group">
+            <label class="form-label" for="name">Name:</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Enter your name" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="example@mail.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject:</label>
+            <select class="form-select" id="subject" name="subject">
+              <option value="general">I have a question</option>
+              <option value="feedback">I want to give feedback</option>
+              <option value="collaboration">I want to work with you</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message:</label>
+            <textarea class="form-textarea" id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <button class="btn btn-secondary" type="reset">Clear Form</button>
+          </div>
+        </form>
+
+        <p id="contact-form-status" class="form-status" role="status" aria-live="assertive"></p>
+      </section>
+
+      <hr>
+
+      <section id="contact-info">
+        <h3 class="section-heading">Other ways to reach us</h3>
+        <p class="body-text">Email: <b>iberianchronicles@sample.com</b></p>
+        <p class="body-text">Location: Madrid, Spain</p>
+        <p class="body-text">
+          Want to know the people behind these stories? Visit our <a href="/about">About page</a> to meet the team.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <%- include('partials/footer', { extraJS: ['/scripts/contact-form.js'] }) %>
+</body>
+</html>

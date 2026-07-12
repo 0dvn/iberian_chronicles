@@ -1,0 +1,29 @@
+<div class="site-header">
+  <header>
+    <h1>Iberian Chronicles</h1>
+  </header>
+  <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-navigation" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
+    <a href="/">Home</a>
+    <a href="/articles">Articles</a>
+    <a href="/about">About us</a>
+    <a href="/contact">Contact</a>
+    <% if (currentUser) { %>
+    <% if (currentUser.role === 'editor' || currentUser.role === 'admin') { %>
+    <a href="/articles/new">New Article</a>
+    <% } %>
+    <a href="/users/<%= currentUser.username %>">Profile</a>
+    <% if (currentUser.role === 'admin') { %>
+    <a href="/admin">Admin</a>
+    <% } %>
+    <a href="/auth/logout">Logout</a>
+    <% } else { %>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/register">Register</a>
+    <% } %>
+  </nav>
+</div>

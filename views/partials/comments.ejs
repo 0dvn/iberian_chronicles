@@ -1,0 +1,48 @@
+<section class="comments-section">
+  <h3 class="section-heading">Comments (<%= comments.length %>)</h3>
+
+  <% if (comments.length === 0) { %>
+  <p class="body-text">No comments yet. Be the first to share your thoughts.</p>
+  <% } %>
+
+  <ul class="comments-list">
+    <% comments.forEach(c => { %>
+    <li class="comment-item">
+      <div class="comment-header">
+        <img class="comment-avatar" src="<%= c.user.avatar %>" alt="Avatar of <%= c.user.username %>" loading="lazy" decoding="async">
+        <a class="comment-author" href="/users/<%= c.user.username %>"><%= c.user.username %></a>
+        <span class="comment-date"><%= c.createdAt.toLocaleDateString() %></span>
+      </div>
+      <p class="comment-body"><%= c.content %></p>
+      <div class="comment-actions">
+        <% if (currentUser) { %>
+        <button class="btn-like-comment<%= userLikedComments.has(c._id.toString()) ? ' liked' : '' %>" type="button" aria-pressed="<%= userLikedComments.has(c._id.toString()) ? 'true' : 'false' %>" aria-label="<%= userLikedComments.has(c._id.toString()) ? 'Unlike comment' : 'Like comment' %>" data-comment-id="<%= c._id %>">
+          <span class="like-icon"><i class="<%= userLikedComments.has(c._id.toString()) ? 'fa-solid' : 'fa-regular' %> fa-heart"></i></span>
+          <span class="like-count"><%= commentLikes[c._id.toString()] || 0 %></span>
+        </button>
+        <% } else { %>
+        <span class="like-count-static"><span class="like-icon"><i class="fa-regular fa-heart"></i></span> <%= commentLikes[c._id.toString()] || 0 %></span>
+        <% } %>
+        <% if (currentUser && (currentUser._id === c.user._id.toString() || currentUser.role === 'admin')) { %>
+        <form action="/articles/<%= article.slug %>/comments/<%= c._id %>/delete" method="post" class="inline-form">
+          <button class="btn-delete-comment" type="submit">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </li>
+    <% }) %>
+  </ul>
+
+  <% if (currentUser) { %>
+  <form action="/articles/<%= article.slug %>/comments" method="post" class="comment-form">
+    <div class="form-group">
+      <label class="form-label" for="comment-content">Leave a comment</label>
+        <textarea class="form-textarea" id="comment-content" name="content" rows="3" maxlength="1000" placeholder="What do you think?" required aria-describedby="comment-help"></textarea>
+    </div>
+      <p id="comment-help" class="body-text">Keep it constructive and specific so other travelers can use it.</p>
+    <button class="btn btn-primary btn-small" type="submit">Post Comment</button>
+  </form>
+  <% } else { %>
+  <p class="body-text"><a href="/auth/login">Log in</a> to leave a comment.</p>
+  <% } %>
+</section>

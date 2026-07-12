@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: 'Edit: ' + article.title, extraCSS: ['/styles/editor.css', 'https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css'] }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <h2 class="page-title">Edit Article</h2>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert alert-error" role="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/articles/<%= article.slug %>?_method=PUT" method="post" enctype="multipart/form-data" class="editor-form">
+        <div class="form-group">
+          <label class="form-label" for="title">Title</label>
+          <input class="form-input" type="text" id="title" name="title" value="<%= article.title %>" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="description">Description</label>
+          <input class="form-input" type="text" id="description" name="description" value="<%= article.description %>">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="category">Category</label>
+            <select class="form-select" id="category" name="category">
+              <% Object.entries(CATEGORIES).forEach(([value, label]) => { %>
+              <option value="<%= value %>" <%= article.category === value ? 'selected' : '' %>><%= label %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tags">Tags</label>
+            <input class="form-input" type="text" id="tags" name="tags" value="<%= article.tags.join(', ') %>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="city">City</label>
+          <input class="form-input" type="text" id="city" name="city" value="<%= article.city || '' %>" placeholder="Madrid, Barcelona, etc.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="featuredImage">Featured Image</label>
+          <% if (article.featuredImage) { %>
+          <div class="image-preview">
+            <img src="<%= article.featuredImage %>" alt="Current featured image">
+          </div>
+          <% } %>
+          <input class="form-input" type="file" id="featuredImage" name="featuredImage" accept="image/jpeg,image/png,image/webp">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Content</label>
+          <div id="quill-editor"><%- article.content %></div>
+          <input type="hidden" name="content" id="content-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="gallery">Photo Gallery</label>
+          <% if (article.gallery && article.gallery.length > 0) { %>
+          <div class="gallery-preview">
+            <% article.gallery.forEach((img, i) => { %>
+            <div class="gallery-thumb">
+              <img src="<%= img.url %>" alt="<%= img.alt %>">
+              <label><input type="checkbox" name="removeGallery" value="<%= i %>"> Remove</label>
+            </div>
+            <% }) %>
+          </div>
+          <% } %>
+          <input class="form-input" type="file" id="gallery" name="gallery" accept="image/jpeg,image/png,image/webp" multiple>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mapQuery">Map Location</label>
+          <input class="form-input" type="text" id="mapQuery" name="mapQuery" value="<%= article.mapQuery %>">
+          <% if (article.mapQuery) { %>
+          <div class="map-preview">
+            <iframe src="https://www.google.com/maps?q=<%= article.mapQuery %>&output=embed" width="100%" height="250" loading="lazy"></iframe>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="status">Status</label>
+          <select class="form-select" id="status" name="status">
+            <option value="published" <%= article.status === 'published' ? 'selected' : '' %>>Published</option>
+            <option value="draft" <%= article.status === 'draft' ? 'selected' : '' %>>Draft</option>
+          </select>
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn btn-primary" type="submit">Update</button>
+          <a href="/articles/<%= article.slug %>" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <%- include('../partials/footer', { extraJS: ['https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js', '/scripts/article-editor.js'] }) %>
+</body>
+</html>

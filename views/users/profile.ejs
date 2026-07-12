@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: user.username, extraCSS: ['/styles/profile.css'] }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <section class="profile-header">
+        <img class="profile-avatar" src="<%= user.avatar %>" alt="Avatar of <%= user.username %>">
+        <div class="profile-info">
+          <h2 class="page-title"><%= user.username %></h2>
+          <span class="profile-role"><%= user.role %></span>
+          <% if (user.bio) { %>
+          <p class="body-text"><%= user.bio %></p>
+          <% } %>
+          <% if (currentUser && currentUser._id === user._id.toString()) { %>
+          <a href="/users/<%= user.username %>/edit" class="btn btn-secondary btn-small">Edit Profile</a>
+          <% } %>
+        </div>
+      </section>
+
+      <section class="profile-articles">
+        <h3 class="section-heading">Articles by <%= user.username %></h3>
+        <% if (articles.length === 0) { %>
+        <p class="body-text">No articles yet.</p>
+        <% } else { %>
+        <ul class="profile-article-list">
+          <% articles.forEach(a => { %>
+          <li>
+            <div class="article-info">
+              <a href="/articles/<%= a.slug %>"><%= a.title %></a>
+              <span class="article-date"><%= a.createdAt.toLocaleDateString() %></span>
+              <% if (a.status === 'draft') { %>
+              <span class="article-draft-badge">Draft</span>
+              <% } %>
+            </div>
+            <% if (currentUser && (currentUser._id === user._id.toString() || currentUser.role === 'admin')) { %>
+            <div class="article-actions">
+              <a href="/articles/<%= a.slug %>/edit" class="btn btn-secondary btn-small">Edit</a>
+              <form action="/articles/<%= a.slug %>/delete" method="post" class="inline-form" onsubmit="return confirm('Delete this article?')">
+                <button class="btn btn-danger btn-small" type="submit">Delete</button>
+              </form>
+            </div>
+            <% } %>
+          </li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </section>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

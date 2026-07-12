@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: 'Articles', description: 'Read our latest travel stories about Spain.', extraCSS: ['/styles/articles.css'] }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main id="page-main" tabindex="-1">
+    <div class="page-container">
+      <section id="articles-section">
+        <h2 class="page-title">Articles</h2>
+
+        <form action="/articles" method="get" class="search-form">
+          <div class="form-group">
+            <label class="form-label" for="search-query">Search articles</label>
+            <input class="form-input" id="search-query" type="text" name="q" value="<%= q %>" placeholder="Search articles...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="search-category">Category</label>
+            <select class="form-select" id="search-category" name="category">
+            <option value="">All Categories</option>
+            <% categories.forEach(cat => { %>
+            <option value="<%= cat %>" <%= category === cat ? 'selected' : '' %>><%= CATEGORIES[cat] || cat %></option>
+            <% }) %>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-small" type="submit">Search</button>
+        </form>
+
+        <% if (q || category || city || tag) { %>
+        <p class="body-text search-results"><%= articles.length %> result<%= articles.length !== 1 ? 's' : '' %> found
+          <% if (q) { %>for "<%= q %>"<% } %>
+          <% if (category) { %>in <%= CATEGORIES[category] || category %><% } %>
+          <% if (city) { %>in <%= city %><% } %>
+          <% if (tag) { %>tagged "<%= tag %>"<% } %>
+          &mdash; <a href="/articles">Clear filters</a>
+        </p>
+        <% } %>
+
+        <% if (articles.length === 0) { %>
+        <p class="body-text">No articles found.</p>
+        <% } else { %>
+        <ul id="articles-list">
+          <% articles.forEach(a => { %>
+          <li class="blog-item">
+            <article class="article-card">
+              <% if (a.featuredImage) { %>
+              <img class="card-thumb" src="<%= a.featuredImage %>" alt="<%= a.title %> photo" loading="lazy" decoding="async">
+              <% } %>
+              <h3 class="section-heading"><%= a.title %></h3>
+              <p class="body-text"><%= a.description %></p>
+              <% if (a.tags && a.tags.length > 0) { %>
+              <div class="tag-list">
+                <% a.tags.forEach(t => { %>
+                <a class="tag-badge" href="/articles?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+                <% }) %>
+              </div>
+              <% } %>
+              <a class="read-more" href="/articles/<%= a.slug %>">Read more</a>
+            </article>
+            <hr>
+          </li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </section>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

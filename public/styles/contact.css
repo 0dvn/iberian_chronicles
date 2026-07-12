@@ -1,0 +1,16 @@
+#contact-form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#contact-info .section-heading {
+  margin-top: 20px;
+  color: #5c2319;
+}

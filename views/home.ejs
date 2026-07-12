@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title, description: 'Welcome to Iberian Chronicles. We share our travel stories and photos from Spain.', extraCSS: ['/styles/home.css'] }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main id="page-main">
+    <div class="page-container">
+      <div id="home-layout">
+        <aside id="home-sidebar">
+          <h3 class="sidebar-title">Cities</h3>
+          <ul class="sidebar-nav">
+            <% cities.forEach(c => { %>
+            <li><a href="/articles?city=<%= encodeURIComponent(c) %>"><%= c %></a></li>
+            <% }) %>
+          </ul>
+        </aside>
+
+        <div id="page-main-content">
+          <section id="recent-articles">
+            <h2 class="section-title page-title">Recent articles</h2>
+            <% articles.slice(0, 3).forEach(a => { %>
+            <article class="article-card">
+              <img src="<%= a.featuredImage %>" alt="<%= a.title %> photo" loading="lazy" decoding="async">
+              <h3 class="section-heading"><%= a.title %></h3>
+              <p class="body-text"><%= a.description %></p>
+              <a href="/articles/<%= a.slug %>">Read more</a>
+            </article>
+            <% }) %>
+          </section>
+
+          <section id="about-intro">
+            <h2 class="section-title page-title">What We Do</h2>
+            <p class="body-text">We share travel stories, practical recommendations, and photo-led guides for your next trip.</p>
+            <p class="body-text">Browse the latest articles for itineraries, hidden streets, food finds, and local perspective.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
